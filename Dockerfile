@@ -10,8 +10,6 @@ RUN git clone https://github.com/themotleyfool/Klondike-Release .
 COPY Settings.config /klondike/Settings.config
 
 EXPOSE 8080
-VOLUME /app/data
-
-COPY Settings.config /klondike/Settings.config
+VOLUME /klondike/data
 
 CMD ["mono", "./bin/Klondike.SelfHost.exe", "--interactive", "--port=8080"]
