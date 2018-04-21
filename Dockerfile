@@ -1,14 +1,13 @@
 FROM mono:4.2
 
-
-RUN apt-get update && \
-    apt-get install wget unzip && \
-    rm -rf /var/cache/apt/*
-
 WORKDIR /klondike
 
-RUN wget https://github.com/themotleyfool/Klondike/releases/download/${KLONDIKE_VERSION}/Klondike.${KLONDIKE_BUILD}.zip -O /klondike/Klondike.${KLONDIKE_BUILD}.zip && \
-    unzip *.zip
+RUN apt-get update && \
+    apt-get install git -y && \
+    rm -rf /var/cache/apt/*
+
+RUN git clone https://github.com/themotleyfool/Klondike-Release .
+COPY Settings.config /klondike/Settings.config
 
 EXPOSE 8080
 VOLUME /app/data
