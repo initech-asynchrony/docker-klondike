@@ -3,7 +3,7 @@ FROM mono:4.2
 WORKDIR /klondike
 
 RUN apt-get update && \
-    apt-get install -y git \
+    apt-get install --no-install-recommends -y git \
     cron \
     python \
     python-pip && \
