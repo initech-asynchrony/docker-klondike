@@ -1,35 +1,25 @@
 # Docker Klondike
-
 ## Mono based
 
-- ```2.0.0```, ```2.0.0-1```, ```2.1.1```
+Docker container to run a Self Hosted version of [Klondike](https://github.com/themotleyfool/Klondike). Klondike is a Nuget repository that can be used to host your own private Nuget repository.
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/athieriot/docker-klondike.svg)]() [![](https://images.microbadger.com/badges/image/athieriot/docker-klondike.svg)](http://microbadger.com/images/athieriot/docker-klondike "Get your own image badge on microbadger.com")
-
-Docker container to run a Self Hosted version of [Klondike](https://github.com/themotleyfool/Klondike)
+By default, it will run statelessly, so rebooting will cause you to lose all of your packages. This image can be setup to allow direct backup to S3 bucket, or can be configured to mount the data directory as a volume for your own backup solution.
 
 # Usage
-
-## Getting Started
-
-        docker run -it -d \
-                   -p 8080:8080 \
-                   --name klondike \
-                   athieriot/docker-klondike
-
 ## Persist Package directory
+```
+docker run -it -p 8080:8080 \
+               -v /some/host/directory/:/klondike/data/ \
+               --name klondike \
+               asyncrony/docker-klondike
+```
+This will start the container and mount the packages folder to a host location. You can backup in any way you like from there.
 
-        docker run -it -d \
-                   -p 8080:8080 \
-                   -v /path/to/packages/:/app/App_Data/Packages \
-                   --name klondike \
-                   athieriot/docker-klondike
-
-## Override configuration            
-
-        docker run -it -d \
-                   -p 8080:8080 \
-                   -v /path/to/Settings.config:/app/Settings.config \
-                   -v /path/to/Web.config:/app/Web.config \
-                   --name klondike \
-                   athieriot/docker-klondike
+## S3 Backup
+```
+docker run -it -p 8080:8080 \
+               -v ~/.aws/credentials:/root/.aws/credentials \
+               -e S3_BUCKET=**SOME_S3_BUCKET** \
+               asyncrony/docker-klondike
+```
+In order to use the S3 Backup feature you will need AWS credentials on the host running the container, and you will need to mount them in to the container like the above example. If running on an EC2 instance, you will need to grant the instance permission to the correct bucket. If running on EC2, omit the mounted volume in the above example.
