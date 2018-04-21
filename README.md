@@ -5,6 +5,10 @@ Docker container to run a Self Hosted version of [Klondike](https://github.com/t
 
 By default, it will run statelessly, so rebooting will cause you to lose all of your packages. This image can be setup to allow direct backup to S3 bucket, or can be configured to mount the data directory as a volume for your own backup solution.
 
+## Authentication
+
+**This repository is setup to allow anonymous pushes and pulls.** There is no security at all. Either using whitelisting to grant access or enable authentication. Klondike itself *does* support this, so if you require authentication I recommend forking this repo and activating those features.
+
 # Usage
 ## Persist Package directory
 ```
