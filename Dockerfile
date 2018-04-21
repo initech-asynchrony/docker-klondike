@@ -1,7 +1,5 @@
 FROM mono:4.2
 
-ENV KLONDIKE_VERSION=v2.1.1
-ENV KLONDIKE_BUILD=2.1.1.22ea5477-build156
 
 RUN apt-get update && \
     apt-get install wget unzip && \
