@@ -7,13 +7,14 @@ RUN apt-get update && \
     apt-get install wget unzip && \
     rm -rf /var/cache/apt/*
 
-WORKDIR /app
+WORKDIR /klondike
 
-RUN wget https://github.com/themotleyfool/Klondike/releases/download/${KLONDIKE_VERSION}/Klondike.${KLONDIKE_BUILD}.zip -O /app/Klondike.${KLONDIKE_BUILD}.zip && \
+RUN wget https://github.com/themotleyfool/Klondike/releases/download/${KLONDIKE_VERSION}/Klondike.${KLONDIKE_BUILD}.zip -O /klondike/Klondike.${KLONDIKE_BUILD}.zip && \
     unzip *.zip
 
 EXPOSE 8080
+VOLUME /app/data
 
-COPY Settings.config /app/Settings.config
+COPY Settings.config /klondike/Settings.config
 
 CMD ["mono", "./bin/Klondike.SelfHost.exe", "--interactive", "--port=8080"]
