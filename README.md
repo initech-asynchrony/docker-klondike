@@ -1,15 +1,26 @@
 # Docker Klondike
-## Mono based
+
+Pre-built image host on DockerHub [asynchrony/docker-klondike](https://hub.docker.com/r/asynchrony/docker-klondike/)
 
 Docker container to run a Self Hosted version of [Klondike](https://github.com/themotleyfool/Klondike). Klondike is a Nuget repository that can be used to host your own private Nuget repository.
 
 By default, it will run statelessly, so rebooting will cause you to lose all of your packages. This image can be setup to allow direct backup to S3 bucket, or can be configured to mount the data directory as a volume for your own backup solution.
 
+The web gui can be accessed from http://*HOSTNAME*:8080
+
 ## Authentication
 
-**This repository is setup to allow anonymous pushes and pulls.** There is no security at all. Either using whitelisting to grant access or enable authentication. Klondike itself *does* support this, so if you require authentication I recommend forking this repo and activating those features.
+**This repository is setup to allow anonymous pushes and pulls.** There is no security at all. Either use whitelisting to grant access or enable authentication. Klondike itself *does* support this, so if you require authentication I recommend forking this repo and activating those features.
 
 # Usage
+## Stateless
+```
+docker run -it -p 8080:8080 \
+               --name klondike \
+               asyncrony/docker-klondike
+```
+Container will run, but nothing will be retained between reboots.
+
 ## Persist Package directory
 ```
 docker run -it -p 8080:8080 \
