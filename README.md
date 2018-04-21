@@ -22,4 +22,4 @@ docker run -it -p 8080:8080 \
                -e S3_BUCKET=**SOME_S3_BUCKET** \
                asyncrony/docker-klondike
 ```
-In order to use the S3 Backup feature you will need AWS credentials on the host running the container, and you will need to mount them in to the container like the above example. If running on an EC2 instance, you will need to grant the instance permission to the correct bucket. If running on EC2, omit the mounted volume in the above example.
+In order to use the S3 Backup feature you will need AWS credentials on the host running the container, and you will need to mount them in to the container like the above example. If running on an EC2 instance, you will need to grant the instance permission to the correct bucket. If running on EC2, omit the mounted volume in the above example. The bucket name *should not* contain the s3:// prefix.
