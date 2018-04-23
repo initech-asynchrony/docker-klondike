@@ -6,6 +6,7 @@ RUN apk add --no-cache -v \
     python \
     py2-pip \
     git \
+    tini \
 && pip install --no-cache-dir awscli \
 && aws --version
 
@@ -20,4 +21,4 @@ RUN chmod +x /usr/bin/run-klondike.sh && chmod +x /usr/bin/s3-sync.sh
 EXPOSE 8080
 VOLUME /klondike/data
 
-CMD ["/usr/bin/run-klondike.sh"]
+CMD ["tini", "/usr/bin/run-klondike.sh"]
