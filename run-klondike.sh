@@ -15,4 +15,4 @@ if [ -n "$S3_BUCKET" ]; then
 fi
 
 echo "Starting Klondike Server"
-mono /klondike/bin/Klondike.SelfHost.exe --interactive --port=8080
+/usr/bin/mono-service -d:/klondike/bin --debug /klondike/bin/Klondike.SelfHost.exe
